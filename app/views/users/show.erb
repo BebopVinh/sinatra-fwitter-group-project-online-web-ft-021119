@@ -1,0 +1,10 @@
+<h1><%= @user.username %> is tweeting!</h1>
+
+<% @user.tweets.each do |tweet| %>
+   <li><%= tweet.content %></li><br>
+<% end %>
+
+<br>
+<form action="/tweets/new" method="post">
+<input type="submit" value="New Tweet" id="submit">
+</form>
