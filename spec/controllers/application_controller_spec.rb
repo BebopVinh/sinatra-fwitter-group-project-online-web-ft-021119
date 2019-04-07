@@ -58,7 +58,8 @@ describe ApplicationController do
       expect(last_response.location).to include('/signup')
     end
 
-    it 'creates a new user and logs them in on valid submission and does not let a logged in user view the signup page' do
+    it 'creates a new user and logs them in on valid submission and 
+    does not let a logged in user view the signup page' do
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
@@ -139,6 +140,7 @@ describe ApplicationController do
 
   describe 'user show page' do
     it 'shows all a single users tweets' do
+      
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)

@@ -1,0 +1,14 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<% Tweet.all.each do |tweet| %>
+   <ol><b><%= tweet.user.username %></b> : <%= tweet.content %></ol><br>
+<% end %>
+
+<form action="/tweets/new" method="post" >
+   <input type="submit" value="New Tweet" id="submit">
+</form>
+
+<br>
+<form action="/logout" method="post">
+   <input type="submit" value="Log Out" id="logout">
+</form>

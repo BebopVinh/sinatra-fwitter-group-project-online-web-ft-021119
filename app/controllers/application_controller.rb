@@ -14,22 +14,34 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'/users/create_user'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do
-    binding.pry
+
     @username = params[:username]
     @password = params[:password]
     @email = params[:email]
     unless @username.empty? || @password.empty? || @email.empty?
-      User.create(params)
+      @user = User.create(params)
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect '/signup'
     end
-    #make new user here
-    redirect '/tweets'
   end
 
-  get '/tweets' do
-    erb :'/tweets/tweets'
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      user = User.find(session[:user_id])
+    end
   end
 end
